@@ -2,11 +2,23 @@ from django.shortcuts import render, redirect
 
 #from django.views.generic import TemplateView
 # Create your views here.
-from django.views.generic import ListView
+from django.views.generic import (
+    ListView,
+    CreateView,
+    UpdateView,
+    DetailView,
+    DeleteView,
+    View,
+)
 
 from .models import Product
 
 from . froms import ProductForm
+
+class ProductListView(ListView):
+    model = Product
+    template_name = 'store/list_product.html'
+    context_object_name = 'products'
 
 
 # Product views
@@ -23,8 +35,7 @@ def create_product(request):
     }
     return render(request, 'store/create_product.html', context)
 
-
-class ProductListView(ListView):
-    model = Product.objects.all()
-    template_name = 'store/product_list.html'
-    context_object_name = 'product'
+class ProductUpdateView(UpdateView):
+    model = Product
+    fields = ['name', 'product_code', 'bying_price', 'selling_price']
+    template_name = 'store/edit_product.html'
