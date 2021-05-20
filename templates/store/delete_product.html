@@ -1,0 +1,17 @@
+{% extends 'base/base.html' %}
+{% block title %}Create Product{% endblock title %}
+
+{% block breadcrumbs %}
+{% load static %}
+
+<div class="container">
+<form method="post">
+{% csrf_token %}
+Are you sure to Delete this post?
+
+<button type="submit">Yes</button>
+</form>
+</div>
+
+
+{% endblock %}
