@@ -12,7 +12,14 @@ class SupplierForm(forms.ModelForm):
             'company_name':forms.TextInput(attrs={'class':'form-control', 'placeholder':'Company name'}),
             'supplier_email':forms.EmailInput(attrs={'class':'form-control', 'placeholder':'Supplier email'}),
             'supplier_phone':forms.TextInput(attrs={'class':'form-control', 'placeholder':'Supplier phone'}),
-            'supplier_address':forms.Textarea(attrs={'class':'form-control', 'placeholder':'Supplier address', 'rows':4})
+            'supplier_address':forms.Textarea(attrs={'class':'form-control', 'placeholder':'Supplier address', 'rows':8})
+        }
+        labels={
+            'name':'Your Name',  
+            'company_name':'Company Name',
+            'supplier_email':'Email',
+            'supplier_phone':'Your Phone',
+            'supplier_address':'Address',
         }
 
 class ProductForm(forms.ModelForm):

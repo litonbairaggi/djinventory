@@ -4,7 +4,6 @@ from django.http.response import HttpResponse
 from django.views import View
 from django.contrib import messages
 
-#from django.views.generic import TemplateView
 # Create your views here.
 from django.views.generic import (
     ListView,
@@ -14,12 +13,10 @@ from django.views.generic import (
     DeleteView,
     View,
 )    
-
 from .models import (
     Product, 
     Supplier
 ) 
-
 from . froms import (
     ProductForm,
     SupplierForm
@@ -30,6 +27,16 @@ class SupplierListView(ListView):
     model = Supplier
     template_name = 'store/list_supplier.html'
     context_object_name = 'suppliers'
+
+class SupplierCreateView(CreateView):
+    model = Supplier
+    form_class = SupplierForm
+    template_name = 'store/create_supplier.html' 
+    def form_invalid(self, form):
+        form.instance.user = self.request.user   
+        return super().form_invalid(form)
+    def get_success_url(self):
+        return reverse_lazy('store:create_supplier')
 
 def create_supplier(request):
     forms = SupplierForm()
@@ -43,14 +50,24 @@ def create_supplier(request):
     }
     return render(request, 'store/create_supplier.html', context) 
 
+class SupplierEditView(UpdateView):
+    model = Supplier 
+    form_class = SupplierForm
+    template_name = 'store/edit_supplier.html'
+    def get_success_url(self):
+        id= self.object.id
+        return reverse_lazy('store:supplier_edit', kwargs={'pk':id})
 
+class SupplierDeleteView(DeleteView):
+    model = Supplier 
+    template_name = 'store/delete_supplier.html'
+    success_url = reverse_lazy('store:supplier_list')
 
 
 class ProductListView(ListView):
     model = Product
     template_name = 'store/list_product.html'
     context_object_name = 'products'
-
 
 class ProductCreateView(CreateView):
     model = Product 
@@ -61,9 +78,6 @@ class ProductCreateView(CreateView):
         return super().form_invalid(form)
     def get_success_url(self):
         return reverse_lazy('store:create_product')    
-
-
-
 
 # Product views
 #@login_required(login_url='login')
@@ -87,8 +101,6 @@ class ProductEditView(UpdateView):
     def get_success_url(self):
         id= self.object.id
         return reverse_lazy('store:product_edit', kwargs={'pk':id})
-
-
   
 class ProductDeleteView(DeleteView):
     model = Product
