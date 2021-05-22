@@ -1,6 +1,6 @@
 from django import forms
 from django.forms import widgets
-from . models import Product, Supplier
+from . models import Product, Supplier, Customer
 
 class SupplierForm(forms.ModelForm):
     class Meta:
@@ -15,7 +15,7 @@ class SupplierForm(forms.ModelForm):
             'supplier_address':forms.Textarea(attrs={'class':'form-control', 'placeholder':'Supplier address', 'rows':8})
         }
         labels={
-            'name':'Your Name',  
+            'name':'Your Name',
             'company_name':'Company Name',
             'supplier_email':'Email',
             'supplier_phone':'Your Phone',
@@ -32,3 +32,20 @@ class ProductForm(forms.ModelForm):
             'bying_price': forms.NumberInput(attrs={"placeholder": "Bying price",'class': 'form-control','id': 'bying_price'}),
             'selling_price': forms.NumberInput(attrs={"placeholder": "Selling price",'class': 'form-control','id': 'selling_price'})
         }
+class CustomerForm(forms.ModelForm):
+    class Meta:
+        model = Customer 
+        fields = ['name', 'customer_email', 'customer_phone', 'customer_address']
+        widgets = {
+            'name': forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'Name'}),
+            'customer_email': forms.EmailInput(attrs={'class': 'form-control', 'placeholder': 'Customer email'}),
+            'customer_phone': forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'Customer phone'}),
+            'customer_address': forms.Textarea(attrs={'class': 'form-control', 'placeholder': 'Customer address', 'rows':4})
+        }
+        labels={
+            'name':'Name',
+            'customer_email':'Email',
+            'customer_phone':'Phone',
+            'customer_address':'Address',
+        }
+    

@@ -15,11 +15,13 @@ from django.views.generic import (
 )    
 from .models import (
     Product, 
-    Supplier
+    Supplier,
+    Customer
 ) 
 from . froms import (
     ProductForm,
-    SupplierForm
+    SupplierForm,
+    CustomerForm
 )
 
 # Supplier views
@@ -106,4 +108,32 @@ class ProductDeleteView(DeleteView):
     model = Product
     template_name="store/delete_product.html"
     success_url = reverse_lazy('store:product_list')
- 
+    
+# Customer    
+class CustomerCreateView(CreateView):
+    model = Customer 
+    form_class = CustomerForm 
+    template_name = 'store/create_customer.html'
+    def form_invalid(self, form):
+        form.instance.user = self.request.user
+        return super().form_invalid(form)
+    def get_success_url(self):
+        return reverse_lazy('store:create_customer')
+
+class CustomerListView(ListView):
+    model = Customer 
+    template_name = 'store/list_customer.html'
+    context_object_name = 'customers'
+
+class CustomerEditView(UpdateView):
+    model = Customer 
+    form_class = CustomerForm
+    template_name = 'store/edit_customer.html'
+    def get_success_url(self):
+        id = self.object.id
+        return reverse_lazy('store:customer_edit', kwargs={'pk':id})
+
+class CustomerDeleteView(DeleteView):
+    model = Customer 
+    template_name = 'store/delete_customer.html'
+    success_url = reverse_lazy('store:customer_list')

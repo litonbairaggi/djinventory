@@ -9,6 +9,10 @@
 * You can buy this theme on WrapBootstrap: https://wrapbootstrap.com/user/creativelabs
 */
 
+
+
+
+
 /* Import Section
 =================================================================== */
 @import url("jquery-ui-1.8.21.custom.css");								/* jQuery User Interface Framework Styles */
@@ -29,8 +33,20 @@
 @import url("halflings.css");											/* Glyphicons Halflings Font */
 @import url("style-forms.css");											/* Forms */
 
+
+
+/* Custom */
+
+
+
+
+
 /* Main Colors
 =================================================================== */
+
+
+/* Custom  */
+
 
 .black,
 .black [class="box-header"],
@@ -2973,3 +2989,8 @@ ul.messagesList li span.date {
 	}
     
 }
+
+
+
+
+

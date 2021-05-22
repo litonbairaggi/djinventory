@@ -2,7 +2,6 @@ from django.db import models
 
 # Create your models here.
 
-
 class Product(models.Model):
     name = models.CharField(max_length=120, unique=True, blank=False)
     product_code = models.CharField(max_length=32, blank=False)
@@ -23,3 +22,13 @@ class Supplier(models.Model):
 
     def __str__(self):
         return self.name
+
+class Customer(models.Model):
+    name = models.CharField(max_length=120, blank=False)
+    customer_email = models.EmailField(max_length=64, unique=True, blank=False)
+    customer_phone = models.CharField(max_length=17, unique=True, blank=False)
+    customer_address = models.CharField(max_length=120, blank=False)
+    created_date = models.DateField(auto_now_add=True)
+    def __str__(self):
+        return self.name
+    
