@@ -20,6 +20,11 @@ from .views import (
     CustomerListView,
     CustomerEditView,
     CustomerDeleteView,
+
+    PurchaseCreateView,
+    PurchaseListView,
+    PurchaseEditView,
+    PurchaseDeleteView,
 )
 app_name="store"
 urlpatterns = [
@@ -39,4 +44,9 @@ urlpatterns = [
     path('customer_list/', CustomerListView.as_view(), name='customer_list'),
     path('customer_edit/<int:pk>/', CustomerEditView.as_view(), name='customer_edit'),
     path('customer_delete/<int:pk>/', CustomerDeleteView.as_view(), name='customer_delete'),
+
+    path('create_purchase/', PurchaseCreateView.as_view(), name='create_purchase'),
+    path('purchase_list/', PurchaseListView.as_view(), name='purchase_list'),
+    path('purchase_edit/<int:pk>/', PurchaseEditView.as_view(), name='purchase_edit'),
+    path('purchase_delete/<int:pk>/', PurchaseDeleteView.as_view(), name='purchase_delete'),
 ]
