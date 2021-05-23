@@ -17,13 +17,15 @@ from .models import (
     Product, 
     Supplier,
     Customer,
-    Purchase
+    Purchase,
+    Sell
 ) 
 from . froms import (
     ProductForm,
     SupplierForm,
     CustomerForm,
     PurchaseForm,
+    SellForm,
 )
 
 # Supplier views
@@ -167,3 +169,30 @@ class PurchaseDeleteView(DeleteView):
     model = Purchase 
     template_name = 'store/delete_purchase.html'
     success_url = reverse_lazy('store:purchase_list')
+
+# Sell
+class SellCreateView(CreateView):
+    model = Sell 
+    form_class = SellForm
+    template_name = 'store/create_sell.html'   
+    def form_invalid(self, form):
+        form.instance.user = self.request.user
+        return super().form_invalid(form)
+    def get_success_url(self):
+        id = self.object.id
+        return reverse_lazy('store:create_sell')  
+class SellListView(ListView):
+    model = Sell 
+    template_name = 'store/list_sell.html' 
+    context_object_name = 'sells' 
+class SellEditView(UpdateView):
+    model = Sell 
+    form_class = SellForm
+    template_name = 'store/edit_sell.html'  
+    def get_success_url(self):   
+        id = self.object.id
+        return reverse_lazy('store:sell_edit', kwargs={'pk':id})
+class SellDeleteView(DeleteView):
+    model = Sell 
+    template_name = 'store/delete_sell.html'
+    success_url = reverse_lazy('store:sell_list')

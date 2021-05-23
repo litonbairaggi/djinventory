@@ -1,6 +1,6 @@
 from django import forms
 from django.forms import widgets
-from . models import Product, Supplier, Customer, Purchase
+from . models import Product, Supplier, Customer, Purchase, Sell
 
 class SupplierForm(forms.ModelForm):
     class Meta:
@@ -63,6 +63,25 @@ class PurchaseForm(forms.ModelForm):
             'product':'Product',
             'supplier':'Supplier',
             'product_quantity':'Quantity',
+            'status':'Status',
+        }
+
+class SellForm(forms.ModelForm):
+    class Meta:
+        model = Sell 
+        fields = ['product', 'customer', 'product_quantity', 'description', 'status']
+        widgets = {
+            'product': forms.Select(attrs={'class': 'form-control'}),
+            'customer': forms.Select(attrs={'class': 'form-control'}),
+            'product_quantity': forms.TextInput(attrs={'class': 'form-control'}),
+            'description': forms.Textarea(attrs={'class': 'form-control', 'placeholder': 'write something'}),
+            'status': forms.Select(attrs={'class': 'form-control'})
+        }
+        labels={
+            'product':'Product',
+            'customer':'Customer',
+            'product_quantity':'Quantity',
+            'description':'Description',
             'status':'Status',
         }
     

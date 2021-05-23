@@ -47,3 +47,15 @@ class Purchase(models.Model):
 
     def __str__(self):
         return self.product.name 
+
+class Sell(models.Model):
+    STATUS =(
+        ('paid', 'Paid'),
+        ('unpaid', 'Unpaid'),
+    )
+    product = models.ForeignKey(Product, on_delete=models.CASCADE)
+    customer = models.ForeignKey(Customer, on_delete=models.CASCADE)
+    product_quantity = models.PositiveIntegerField(default=0)
+    description = models.TextField(max_length=200, blank= False)
+    status = models.CharField(max_length=100, choices=STATUS, default='paid')
+    created_date = models.DateTimeField(default=now)

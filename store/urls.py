@@ -25,6 +25,11 @@ from .views import (
     PurchaseListView,
     PurchaseEditView,
     PurchaseDeleteView,
+
+    SellCreateView,
+    SellListView,
+    SellEditView,
+    SellDeleteView,
 )
 app_name="store"
 urlpatterns = [
@@ -49,4 +54,9 @@ urlpatterns = [
     path('purchase_list/', PurchaseListView.as_view(), name='purchase_list'),
     path('purchase_edit/<int:pk>/', PurchaseEditView.as_view(), name='purchase_edit'),
     path('purchase_delete/<int:pk>/', PurchaseDeleteView.as_view(), name='purchase_delete'),
+
+    path('create_sell/', SellCreateView.as_view(), name='create_sell'),
+    path('sell_list/', SellListView.as_view(), name='sell_list'),
+    path('sell_edit/<int:pk>/', SellEditView.as_view(), name='sell_edit'),
+    path('sell_delete/<int:pk>/', SellDeleteView.as_view(), name='sell_delete'),
 ]
