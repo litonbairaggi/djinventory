@@ -2,7 +2,12 @@ from django.contrib import admin
 
 # Register your models here.
 from . models import (
-    Product, Supplier
+    Product,
+    Supplier,
+    Customer, 
+    Purchase, 
+    Sell, 
+    Setting
     )
 @admin.register(Product)
 class ProductAdmin(admin.ModelAdmin):
@@ -10,3 +15,7 @@ class ProductAdmin(admin.ModelAdmin):
 
 
 admin.site.register(Supplier)
+admin.site.register(Customer)
+admin.site.register(Purchase)
+admin.site.register(Sell)
+admin.site.register(Setting)

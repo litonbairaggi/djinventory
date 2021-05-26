@@ -1,6 +1,7 @@
 from django import forms
 from django.forms import widgets
-from . models import Product, Supplier, Customer, Purchase, Sell
+
+from . models import Product, Supplier, Customer, Purchase, Sell, Setting 
 
 class SupplierForm(forms.ModelForm):
     class Meta:
@@ -84,4 +85,25 @@ class SellForm(forms.ModelForm):
             'description':'Description',
             'status':'Status',
         }
+  
+class SettingForm(forms.ModelForm):
+    class Meta:
+        model = Setting 
+        fields = ['company_name', 'logo', 'email', 'facebook', 'phone', 'address']
+        widgets = {
+            'company_name': forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'name'}),
+            'logo': forms.FileInput(),
+            'email': forms.EmailInput(attrs={'class': 'form-control', 'placeholder': 'email'}),
+            'facebook': forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'facebook'}),
+            'phone': forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'phone'}),
+            'address': forms.Textarea(attrs={'class': 'form-control', 'placeholder': 'address'}),
+        }
+        labels={
+            'company_name':'Company name',
+            'logo':'Company logo',
+            'email':'Company email',
+            'facebook':'Company facebook',
+            'phone':'Company phone',
+            'address':'Company Address',
+        }       
     

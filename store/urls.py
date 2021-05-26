@@ -30,6 +30,8 @@ from .views import (
     SellListView,
     SellEditView,
     SellDeleteView,
+
+    SettingCreateView,
 )
 app_name="store"
 urlpatterns = [
@@ -59,4 +61,6 @@ urlpatterns = [
     path('sell_list/', SellListView.as_view(), name='sell_list'),
     path('sell_edit/<int:pk>/', SellEditView.as_view(), name='sell_edit'),
     path('sell_delete/<int:pk>/', SellDeleteView.as_view(), name='sell_delete'),
+
+    path('create_setting/', SettingCreateView.as_view(), name='create_setting'),
 ]

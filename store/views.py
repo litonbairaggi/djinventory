@@ -18,7 +18,8 @@ from .models import (
     Supplier,
     Customer,
     Purchase,
-    Sell
+    Sell,
+    Setting,
 ) 
 from . froms import (
     ProductForm,
@@ -26,6 +27,7 @@ from . froms import (
     CustomerForm,
     PurchaseForm,
     SellForm,
+    SettingForm,
 )
 
 # Supplier views
@@ -196,3 +198,15 @@ class SellDeleteView(DeleteView):
     model = Sell 
     template_name = 'store/delete_sell.html'
     success_url = reverse_lazy('store:sell_list')
+
+# Settings 
+class SettingCreateView(CreateView): 
+    model = Setting
+    form_class = SettingForm
+    template_name = 'store/create_settings.html'
+    def form_invalid(self, form):
+        form.instance.user = self.request.user
+        return super().form_invalid(form)
+    def get_success_url(self):
+        id = self.object.id
+        return reverse_lazy('store:create_settings')    
